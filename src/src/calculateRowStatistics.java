@@ -57,7 +57,7 @@ public class calculateRowStatistics {
         return meanValues;
     }
 
-    public static void rowStatisticsCalculator(Counts counts, int[] group){
+    public static Counts rowStatisticsCalculator(Counts counts, int[] group){
         List<List<Integer>> variances = new ArrayList<>();
         List<List<Integer>> meanValues = new ArrayList<>();
         List<List<Integer>> count = counts.getCounts();
@@ -105,5 +105,23 @@ public class calculateRowStatistics {
         }
         counts.setMean(meanValues);
         counts.setVariance(variances);
+        return counts;
+    }
+
+    public static void main(String[] args) {
+        String filePath = args[0];
+        Counts csvData = CsvReader.readInCsv(filePath, ";");
+        int[] group = groupDefiner(csvData);
+        csvData = calculateRowStatistics.rowStatisticsCalculator(csvData, group);
+
+        // Print the data
+        for (List<Integer> row : csvData.getCounts()) {
+            for (Integer column : row) {
+                System.out.print(column + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(csvData.getGeneNames());
+        System.out.println(csvData.getDescriptors());
     }
 }
