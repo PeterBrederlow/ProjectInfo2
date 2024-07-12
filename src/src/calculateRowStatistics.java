@@ -26,9 +26,10 @@ public class calculateRowStatistics {
         return group;
     }
 
-    public static List<List<Integer>> meanCalculator(Counts counts, int[] group){
+    public static List<List<Integer>> meanCalculator(Counts counts){
         List<List<Integer>> count = counts.getCounts();
         List<List<Integer>> meanValues = new ArrayList<>();
+        int[] group = groupDefiner(counts);
         int rownumber = count.size();
         int colnumber = count.get(0).size();
             for(int i = 0; i < rownumber; i++) {
@@ -49,7 +50,7 @@ public class calculateRowStatistics {
                 }
                 int meanOne = (CounterOne != 0) ? MagnitudeOne / CounterOne : 0;
                 int meanTwo = (CounterTwo != 0) ? MagnitudeTwo / CounterTwo : 0;
-                List<Integer> groupMeans = new ArrayList<>(row);
+                List<Integer> groupMeans = new ArrayList<>();
                 groupMeans.add(meanOne);
                 groupMeans.add(meanTwo);
                 meanValues.add(groupMeans);

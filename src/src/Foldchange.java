@@ -5,8 +5,7 @@ public class Foldchange {
 
     public static List<List<Double>> estimateFoldchange(Counts counts){
         List<List<Double>> foldchange = new ArrayList<>();
-        int[] ints = calculateRowStatistics.groupDefiner(counts);
-        List<List<Integer>> mean = calculateRowStatistics.meanCalculator(counts, ints);
+        List<List<Integer>> mean = calculateRowStatistics.meanCalculator(counts);
 
         for (int i = 0; i < mean.size(); i++){
             double mean0 = mean.get(i).get(0);
