@@ -12,14 +12,23 @@ public class tTest {
     }
 
     //two-sided Students t-Test
-    public static double tTester(TCriticalValues criticalValues, double tStat, double significanceLevel, double degreesOfFreedom){
+    public static boolean tTester(TCriticalValues criticalValues, double tStat, double significanceLevel, double degreesOfFreedom){
         double p_value = 0;
-        if(significanceLevel == 0.1){List<Double> criticalVs = criticalValues.getLevel0_10();}
-        else if(significanceLevel == 0.05){List<Double> criticalVs = criticalValues.getLevel0_05();}
-        else if(significanceLevel == 0.025){List<Double> criticalVs = criticalValues.getLevel0_025();}
-        else if(significanceLevel == 0.01){List<Double> criticalVs = criticalValues.getLevel0_01();}
-        else{List<Double> criticalVs = criticalValues.getLevel0_005();}
-        return p_value;
+        List<Double> criticalVs = new ArrayList<>();
+        if(significanceLevel == 0.1){criticalVs = criticalValues.getLevel0_10();}
+        else if(significanceLevel == 0.05){criticalVs = criticalValues.getLevel0_05();}
+        else if(significanceLevel == 0.025){criticalVs = criticalValues.getLevel0_025();}
+        else if(significanceLevel == 0.01){criticalVs = criticalValues.getLevel0_01();}
+        else{criticalVs = criticalValues.getLevel0_005();}
+        for(int i = 0; i < criticalVs.size(); i++){
+            if(i == degreesOfFreedom){
+                if(criticalVs.get(i) < tStat){
+                    return true;
+                }
+                else{return false;}
+            }
+        }
+        return false;
     }
 
 }
