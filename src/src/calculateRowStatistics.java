@@ -14,15 +14,21 @@ public class calculateRowStatistics {
         }
         int colnumber = descriptors.size();
         int[] group = new int[colnumber];
+        int groupcountN1 =0 ;
+        int groupcountN2 = 0;
         for(int i = 0; i < colnumber; i++){
             if(descriptors.get(i) == uniqueElements.get(0)){
                 group[i] = 0;
+                groupcountN1++;
             }
             else{
                 group[i] = 1;
+                groupcountN2++;
             }
         }
         count.setGroup(group);
+        count.setGroupsizeN1(groupcountN1);
+        count.setGroupsizeN2(groupcountN2);
         return group;
     }
 
@@ -59,17 +65,17 @@ public class calculateRowStatistics {
     }
 
     public static Counts rowStatisticsCalculator(Counts counts, int[] group){
-        List<List<Integer>> variances = new ArrayList<>();
-        List<List<Integer>> meanValues = new ArrayList<>();
-        List<List<Integer>> count = counts.getCounts();
+        List<List<Double>> variances = new ArrayList<>();
+        List<List<Double>> meanValues = new ArrayList<>();
+        List<List<Double>> count = counts.getNormCounts();
         int rownumber = count.size();
         int colnumber = count.get(0).size();
         for(int i = 0; i < rownumber; i++) {
-            List<Integer> row = count.get(i);
-            int CounterOne = 0;
-            int CounterTwo = 0;
-            int MagnitudeOne = 0;
-            int MagnitudeTwo = 0;
+            List<Double> row = count.get(i);
+            double CounterOne = 0;
+            double CounterTwo = 0;
+            double MagnitudeOne = 0;
+            double MagnitudeTwo = 0;
             for (int j = 0; j < colnumber; j++) {
                 if(group[j] == 0){
                     CounterOne++;
@@ -80,12 +86,12 @@ public class calculateRowStatistics {
                     MagnitudeTwo = MagnitudeTwo + row.get(j);
                 }
             }
-            int meanOne = (CounterOne != 0) ? MagnitudeOne / CounterOne : 0;
-            int meanTwo = (CounterTwo != 0) ? MagnitudeTwo / CounterTwo : 0;
-            int degreesOfFreedom1 = CounterOne-1;
-            int degreesOfFreedom2 = CounterTwo-1;
-            int sumOfSquaresOne = 0;
-            int sumOfSquaresTwo = 0;
+            double meanOne = (CounterOne != 0) ? MagnitudeOne / CounterOne : 0;
+            double meanTwo = (CounterTwo != 0) ? MagnitudeTwo / CounterTwo : 0;
+            double degreesOfFreedom1 = CounterOne-1;
+            double degreesOfFreedom2 = CounterTwo-1;
+            double sumOfSquaresOne = 0;
+            double sumOfSquaresTwo = 0;
             for (int j = 0; j < colnumber; j++) {
                 if (group[j] == 0) {
                     sumOfSquaresOne += Math.pow(row.get(j) - meanOne, 2);
@@ -93,10 +99,10 @@ public class calculateRowStatistics {
                     sumOfSquaresTwo += Math.pow(row.get(j) - meanTwo, 2);
                 }
             }
-            int varianceOne = (CounterOne > 1) ? sumOfSquaresOne / degreesOfFreedom1 : 0;
-            int varianceTwo = (CounterTwo > 1) ? sumOfSquaresTwo / degreesOfFreedom2 : 0;
-            List<Integer> groupMeans = new ArrayList<>(row);
-            List<Integer> groupVariances = new ArrayList<>(row);
+            double varianceOne = (CounterOne > 1) ? sumOfSquaresOne / degreesOfFreedom1 : 0;
+            double varianceTwo = (CounterTwo > 1) ? sumOfSquaresTwo / degreesOfFreedom2 : 0;
+            List<Double> groupMeans = new ArrayList<>(row);
+            List<Double> groupVariances = new ArrayList<>(row);
             groupMeans.add(meanOne);
             groupMeans.add(meanTwo);
             groupVariances.add(meanOne);

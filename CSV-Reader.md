@@ -1,0 +1,4 @@
+-> how to handle first row with gene-names 
+		-> separate Gene List that can be indexed accordingly?
+		-> ArrayList type that can store different datatypes? 
+-> how do we want to store the data in general? 
