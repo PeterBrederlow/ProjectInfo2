@@ -17,7 +17,7 @@ public class BenjaminiHochberg {
         return doubleArray;
     }
 
-    //Methode aus Foliensatz 22 der VO Praktische Informatik2, adaptiert um originale Positionen zu speichern
+    //Methode aus Foliensatz 22 der VO Praktische Informatik2
     /**
      * sorts after p-values
      *
