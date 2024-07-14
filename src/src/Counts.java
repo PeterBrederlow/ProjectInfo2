@@ -12,6 +12,7 @@ public class Counts {
     private List<List<Double>> variance;
     private List<Double> pValue;
     private List<Double> adjPValue;
+    private List<List<Double>> foldchange;
 
     public Counts(List<String> list1, List<String> list2 , List<List<Integer>> list3) {
         this.geneNames = list1;
@@ -19,13 +20,14 @@ public class Counts {
         this.counts = list3;
     }
 
-    public Counts(List<String> list1, List<String> list2 , List<List<Integer>> list3, List<List<Double>> list4 , List<List<Double>> list5, List<List<Double>> list6) {
+    public Counts(List<String> list1, List<String> list2 , List<List<Integer>> list3, List<List<Double>> list4 , List<List<Double>> list5, List<List<Double>> list6, List<List<Double>> list7) {
         this.geneNames = list1;
         this.descriptors = list2;
         this.counts = list3;
         this.mean = list4;
         this.variance = list5;
         this.normCounts = list6;
+        this.foldchange = list7;
     }
 
     public List<String> getDescriptors() {
@@ -99,5 +101,9 @@ public class Counts {
     public void setAdjPValue(List<Double> adjPValue) {
         this.adjPValue = adjPValue;
     }
+
+    public void setFoldchange(List<List<Double>> foldchange) {this.foldchange = foldchange;}
+
+    public List<List<Double>> getFoldchange() {return this.foldchange;}
 
 }

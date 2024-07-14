@@ -15,6 +15,8 @@ public class Main {
         calculateRowStatistics.groupDefiner(csvData);
         calculateRowStatistics.rowStatisticsCalculator(csvData, new int[] {0, 1});
         Foldchange.estimateFoldchange(csvData);
+        tTest.tTester(csvData);
+        BenjaminiHochberg.BenjaminiHochberg(csvData);
 
 
         System.out.println(csvData.getDescriptors());
@@ -22,5 +24,8 @@ public class Main {
         System.out.println(csvData.getNormCounts().get(0));
         System.out.println(csvData.getVariance().get(0));
         System.out.println(csvData.getMean().get(0));
+        System.out.println(csvData.getFoldchange().get(0));
+        System.out.println(csvData.getPValue().get(0));
+        System.out.println(csvData.getAdjPValue().get(0));
     }
 }

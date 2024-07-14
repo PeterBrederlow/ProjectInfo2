@@ -20,6 +20,7 @@ public class Foldchange {
             fold.add( Math.log(mean0 / mean1) / Math.log(2));
             foldchange.add(fold);
         }
+        counts.setFoldchange(foldchange);
         return foldchange;
     }
 
