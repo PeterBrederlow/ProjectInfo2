@@ -2,8 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class calculateRowStatistics {
-
-    //assuming there are only two groups to compare...assign groups (0/1) after descriptors
+    /**
+     * Method to create groups to compare and sets the sizes of them in the counts object
+     * assuming there are only two groups to compare...assign groups (0/1) after descriptors
+     * @param  count is the input Counts object containing the ArrayList with the counts
+     *             that resulted from reading in the .csv file.
+     * @return object that defines the groups
+     */
     public static int[] groupDefiner(Counts count){
         List<String> descriptors = count.getDescriptors();
         List<String> uniqueElements = new ArrayList<>();
@@ -32,6 +37,13 @@ public class calculateRowStatistics {
         return group;
     }
 
+    /**
+     * Method that calculates the arithmetic mean of the groups
+     *
+     * @param  counts is the input Counts object containing the ArrayList with the counts
+     *             that resulted from reading in the .csv file.
+     * @return counts object, that now has the set means for each group, stored in a list for each gene
+     */
     public static List<List<Double>> meanCalculator(Counts counts){
         List<List<Integer>> count = counts.getCounts();
         List<List<Double>> meanValues = new ArrayList<>();
@@ -64,6 +76,14 @@ public class calculateRowStatistics {
         return meanValues;
     }
 
+    /**
+     * Method that calculates the relevant statistics (mean and variance) for each gene and adds it to the count object
+     *
+     * @param  counts is the input Counts object containing the ArrayList with the counts
+     *             that resulted from reading in the .csv file
+     * @param  group  the groups to compare
+     * @return counts object, that now has the set means and variances for each group, stored in a list for each gene
+     */
     public static Counts rowStatisticsCalculator(Counts counts, int[] group){
         List<List<Double>> variances = new ArrayList<>();
         List<List<Double>> meanValues = new ArrayList<>();

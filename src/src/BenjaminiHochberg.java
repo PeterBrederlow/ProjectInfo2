@@ -2,6 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BenjaminiHochberg {
+    /**
+     * creates a double array containing the p-values
+     *
+     * @param  count containing the p-values from the t-Test
+     * @return p-value array
+     */
     public static double[] pValueToArray(Counts count){
         List<Double> pValues = count.getPValue();
         double[] doubleArray = new double[pValues.size()];
@@ -12,6 +18,12 @@ public class BenjaminiHochberg {
     }
 
     //Methode aus Foliensatz 22 der VO Praktische Informatik2, adaptiert um originale Positionen zu speichern
+    /**
+     * sorts after p-values
+     *
+     * @param  array is an unsorted double array, in this case for p-values
+     * @return sorted p-value array
+     */
     public static double[] insertionSort(double[] array) {
         for (int i = 1; i < array.length; i++) {
             double key = array[i];
@@ -27,6 +39,13 @@ public class BenjaminiHochberg {
         return array;
     }
 
+    /**
+     * works similar to insertionSort, but creates a mapping, so that adjusted p-Values can get
+     * mapped back to their original position
+     *
+     * @param  array is an unsorted double array, in this case for p-values
+     * @return List containing the index prior and after sorting
+     */
     public static List<Integer> insertionSortMapper(double[] array) {
         int n = array.length;
         List<Integer> indexMapping = new ArrayList<>();
@@ -51,6 +70,17 @@ public class BenjaminiHochberg {
         return indexMapping;
     }
 
+    /**
+     * Benjamini Hochberg correction for multiple testing, to adjust for false positive
+     * significant p-values. Here is an explanation link:
+     * https://www.youtube.com/watch?v=K8LQSvtjcEo&t=618s
+     *
+     * @param  count containing the unsorted p-values
+     *         the unsorted p-values get sorted, then the Benjamini Hochberg adjusted p-values
+     *         are calculated and mapped back to their original position. After that they also
+     *         get set in the count object.
+     * @return List containing the adjusted p-values
+     */
     public static List<Double> BenjaminiHochberg(Counts count){
         double[] unsortedPValues = pValueToArray(count);
         List<Integer> indexMapping = insertionSortMapper(unsortedPValues);
