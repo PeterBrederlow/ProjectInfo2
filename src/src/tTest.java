@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.math3.distribution.TDistribution;
 
 public class tTest {
     public static double tStatCalc(double mean1, double mean2, double var1, double var2, int n1, int n2){
@@ -11,8 +12,8 @@ public class tTest {
         return groupsize1+groupsize2-2;
     }
 
-    //two-sided Students t-Test
-    public static boolean tTester(TCriticalValues criticalValues, double tStat, double significanceLevel, double degreesOfFreedom){
+    //two-sided Students t-Test simplified
+    public static boolean tTesterSimple(TCriticalValues criticalValues, double tStat, double significanceLevel, double degreesOfFreedom){
         double p_value = 0;
         List<Double> criticalVs = new ArrayList<>();
         if(significanceLevel == 0.1){criticalVs = criticalValues.getLevel0_10();}
@@ -29,6 +30,12 @@ public class tTest {
             }
         }
         return false;
+    }
+
+    //two sided Students t-Test with p-value calculation via math commons lib
+    public static double tTester(double tStat, double degreesOfFreedom){
+        TDistribution tDistribution = new TDistribution(degreesOfFreedom);
+        return 2 * (1 - tDistribution.cumulativeProbability(Math.abs(tStat)));
     }
 
 }
