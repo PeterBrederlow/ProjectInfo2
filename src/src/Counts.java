@@ -11,6 +11,7 @@ public class Counts {
     private List<List<Double>> mean;
     private List<List<Double>> variance;
     private List<Double> pValue;
+    private List<Double> adjPValue;
 
     public Counts(List<String> list1, List<String> list2 , List<List<Integer>> list3) {
         this.geneNames = list1;
@@ -59,8 +60,12 @@ public class Counts {
         return variance;
     }
 
-    public List<Double> getpValue() {
+    public List<Double> getPValue() {
         return pValue;
+    }
+
+    public List<Double> getAdjPValue() {
+        return adjPValue;
     }
 
     public void setGroup(int[] group) {
@@ -90,4 +95,9 @@ public class Counts {
     public void setpValue(List<Double> pValue) {
         this.pValue = pValue;
     }
+
+    public void setAdjPValue(List<Double> adjPValue) {
+        this.adjPValue = adjPValue;
+    }
+
 }
