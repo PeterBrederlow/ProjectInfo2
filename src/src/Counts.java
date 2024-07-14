@@ -13,6 +13,9 @@ public class Counts {
     private List<Double> pValue;
     private List<Double> adjPValue;
     private List<List<Double>> foldchange;
+    private double[] logFoldchange;
+    private double[] adjPVal;
+
 
     public Counts(List<String> list1, List<String> list2 , List<List<Integer>> list3) {
         this.geneNames = list1;
@@ -105,5 +108,13 @@ public class Counts {
     public void setFoldchange(List<List<Double>> foldchange) {this.foldchange = foldchange;}
 
     public List<List<Double>> getFoldchange() {return this.foldchange;}
+
+    public void setLogFoldchange(double[] logFoldchange){this.logFoldchange = logFoldchange;}
+
+    public double[] getLogFoldchange(){return this.logFoldchange;}
+
+    public void setAdjPVal(double[] adjPVal){this.adjPVal = adjPVal;}
+
+    public double[] getAdjPVal(){return this.adjPVal;}
 
 }

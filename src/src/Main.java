@@ -1,3 +1,6 @@
+import org.knowm.xchart.BubbleChart;
+import org.knowm.xchart.BubbleChartBuilder;
+import org.knowm.xchart.SwingWrapper;
 import java.util.List;
 
 
@@ -17,15 +20,7 @@ public class Main {
         Foldchange.estimateFoldchange(csvData);
         tTest.tTester(csvData);
         BenjaminiHochberg.BenjaminiHochberg(csvData);
-
-
-        System.out.println(csvData.getDescriptors());
-        System.out.println(csvData.getCounts().get(0));
-        System.out.println(csvData.getNormCounts().get(0));
-        System.out.println(csvData.getVariance().get(0));
-        System.out.println(csvData.getMean().get(0));
-        System.out.println(csvData.getFoldchange().get(0));
-        System.out.println(csvData.getPValue().get(0));
-        System.out.println(csvData.getAdjPValue().get(0));
+        tTest.filterSignificance(csvData);
+        Graphics.plot(csvData, filePath);
     }
 }

@@ -121,8 +121,8 @@ public class calculateRowStatistics {
             }
             double varianceOne = (CounterOne > 1) ? sumOfSquaresOne / degreesOfFreedom1 : 0;
             double varianceTwo = (CounterTwo > 1) ? sumOfSquaresTwo / degreesOfFreedom2 : 0;
-            List<Double> groupMeans = new ArrayList<>(row);
-            List<Double> groupVariances = new ArrayList<>(row);
+            List<Double> groupMeans = new ArrayList<>();
+            List<Double> groupVariances = new ArrayList<>();
             groupMeans.add(meanOne);
             groupMeans.add(meanTwo);
             groupVariances.add(varianceOne);
@@ -133,22 +133,5 @@ public class calculateRowStatistics {
         counts.setMean(meanValues);
         counts.setVariance(variances);
         return counts;
-    }
-
-    public static void main(String[] args) {
-        String filePath = args[0];
-        Counts csvData = CsvReader.readInCsv(filePath, ";");
-        int[] group = groupDefiner(csvData);
-        csvData = calculateRowStatistics.rowStatisticsCalculator(csvData, group);
-
-        // Print the data
-        for (List<Integer> row : csvData.getCounts()) {
-            for (Integer column : row) {
-                System.out.print(column + " ");
-            }
-            System.out.println();
-        }
-        System.out.println(csvData.getGeneNames());
-        System.out.println(csvData.getDescriptors());
     }
 }

@@ -98,4 +98,19 @@ public class tTest {
         count.setpValue(pValue);
         return pValue;
     }
+
+    public static void filterSignificance(Counts count){
+        double[] pValue = new double[count.getAdjPValue().size()];
+        double[] logFoldchange = new double[count.getAdjPValue().size()];
+
+        for (int i = 0 ; i < count.getAdjPValue().size(); i++){
+            if (count.getAdjPValue().get(i) < 0.05){
+                pValue[i] = count.getAdjPValue().get(i);
+                logFoldchange[i] = count.getFoldchange().get(i).get(0);
+            }
+        }
+
+        count.setLogFoldchange(logFoldchange);
+        count.setAdjPVal(pValue);
+    }
 }
