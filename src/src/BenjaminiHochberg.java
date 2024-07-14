@@ -28,23 +28,26 @@ public class BenjaminiHochberg {
     }
 
     public static List<Integer> insertionSortMapper(double[] array) {
+        int n = array.length;
         List<Integer> indexMapping = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            indexMapping.add(i);
+        }
 
-        for (int i = 1; i < array.length; i++) {
+        for (int i = 1; i < n; i++) {
             double key = array[i];
+            int keyIndex = indexMapping.get(i);
             int j = i - 1;
 
-            // Verschiebe Elemente des Arrays, die größer als der Schlüssel sind,
-            // eine Position nach rechts
             while (j >= 0 && array[j] > key) {
                 array[j + 1] = array[j];
-                j--;
+                indexMapping.set(j + 1, indexMapping.get(j));
+                j = j - 1;
             }
             array[j + 1] = key;
-            if (j + 1 != i) {
-                indexMapping.add(j + 1);
-            }
+            indexMapping.set(j + 1, keyIndex);
         }
+
         return indexMapping;
     }
 
@@ -58,6 +61,9 @@ public class BenjaminiHochberg {
             adjPValues[i] = adjP;
         }
         List<Double> originalOrderAdjPValues = new ArrayList<>();
+        for (int i = 0; i < adjPValues.length; i++) {
+            originalOrderAdjPValues.add(0.0);
+        }
         for (int i = 0; i < indexMapping.size(); i++) {
             originalOrderAdjPValues.set(indexMapping.get(i), adjPValues[i]);
         }
