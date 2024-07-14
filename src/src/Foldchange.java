@@ -11,10 +11,10 @@ public class Foldchange {
             double mean0 = mean.get(i).get(0);
             double mean1 = mean.get(i).get(1);
             if (mean1 == 0){
-                mean1 = 1E-6;
+                mean1 = 1;
             }
             if (mean0 == 0){
-                mean0 = 1E-6;
+                mean0 = 1;
             }
             List<Double> fold = new ArrayList<>();
             fold.add( Math.log(mean0 / mean1) / Math.log(2));
