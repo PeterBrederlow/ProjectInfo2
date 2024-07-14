@@ -96,7 +96,7 @@ public class calculateRowStatistics {
             double CounterTwo = 0;
             double MagnitudeOne = 0;
             double MagnitudeTwo = 0;
-            for (int j = 0; j < colnumber; j++) {
+            for (int j = 0; j < 2; j++) {
                 if(group[j] == 0){
                     CounterOne++;
                     MagnitudeOne = MagnitudeOne + row.get(j);
@@ -112,7 +112,7 @@ public class calculateRowStatistics {
             double degreesOfFreedom2 = CounterTwo-1;
             double sumOfSquaresOne = 0;
             double sumOfSquaresTwo = 0;
-            for (int j = 0; j < colnumber; j++) {
+            for (int j = 0; j < 2; j++) {
                 if (group[j] == 0) {
                     sumOfSquaresOne += Math.pow(row.get(j) - meanOne, 2);
                 } else {
@@ -125,8 +125,8 @@ public class calculateRowStatistics {
             List<Double> groupVariances = new ArrayList<>(row);
             groupMeans.add(meanOne);
             groupMeans.add(meanTwo);
-            groupVariances.add(meanOne);
-            groupVariances.add(meanTwo);
+            groupVariances.add(varianceOne);
+            groupVariances.add(varianceTwo);
             meanValues.add(groupMeans);
             variances.add(groupVariances);
         }
