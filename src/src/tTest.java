@@ -32,10 +32,34 @@ public class tTest {
         return false;
     }
 
-    //two sided Students t-Test with p-value calculation via math commons lib
-    public static double tTester(double tStat, double degreesOfFreedom){
+    //two-sided Students t-Test with p-value calculation via math commons lib
+    public static double finalCalculator(double tStat, double degreesOfFreedom){
         TDistribution tDistribution = new TDistribution(degreesOfFreedom);
         return 2 * (1 - tDistribution.cumulativeProbability(Math.abs(tStat)));
     }
 
+
+    //actual implementation
+    public static List<Double> tTester(Counts count){
+        List<Double> pValue = new ArrayList<>();
+        int groupsize1 = count.getGroupsizeN1();
+        int groupsize2 = count.getGroupsizeN2();
+        List<List<Double>> var = count.getVariance();
+        List<List<Double>> mean = count.getMean();
+        int rownumber = var.size();
+        for(int i = 0; i < rownumber; i++) {
+            List<Double> rowMean = mean.get(i);
+            List<Double> rowVariance = var.get(i);
+            double mean1 = rowMean.get(0);
+            double mean2 = rowMean.get(1);
+            double var1 = rowVariance.get(0);
+            double var2 = rowVariance.get(1);
+            double tStat = tStatCalc(mean1, mean2, var1, var2, groupsize1, groupsize2);
+            int degreesOfFreedom = degreesOfFreedomCalc(groupsize1, groupsize2);
+            double p = finalCalculator(tStat, degreesOfFreedom);
+            pValue.add(p);
+        }
+        count.setpValue(pValue);
+        return pValue;
+    }
 }
