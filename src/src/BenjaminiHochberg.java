@@ -87,7 +87,7 @@ public class BenjaminiHochberg {
         double[] sortedpValues = insertionSort(unsortedPValues);
         double[] adjPValues = new double[sortedpValues.length];
         for(int i = sortedpValues.length-1; i >= 0; i--){
-            double adjP = Math.min(sortedpValues[i], sortedpValues[i] * ((double) sortedpValues.length /(i+1)));
+            double adjP = Math.max(sortedpValues[i], sortedpValues[i] * ((double) sortedpValues.length /(i+1)));
             adjPValues[i] = adjP;
         }
         List<Double> originalOrderAdjPValues = new ArrayList<>();

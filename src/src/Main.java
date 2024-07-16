@@ -21,6 +21,14 @@ public class Main {
         tTest.tTester(csvData);
         BenjaminiHochberg.BenjaminiHochberg(csvData);
         tTest.filterSignificance(csvData);
+        System.out.println(csvData.getDescriptors());
+        System.out.println(csvData.getCounts().get(16283));
+        System.out.println(csvData.getNormCounts().get(16283));
+        System.out.println(csvData.getVariance().get(16283));
+        System.out.println(csvData.getMean().get(16283));
+        System.out.println(csvData.getFoldchange().get(16283));
+        System.out.println(csvData.getPValue().get(16283));
+        System.out.println(csvData.getAdjPValue().get(16283));
         Graphics.plot(csvData, filePath);
     }
 }
